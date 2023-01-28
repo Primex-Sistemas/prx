@@ -15,7 +15,7 @@ return [
     */
 
     'title' => 'Primex',
-    'title_prefix' => 'P',
+    'title_prefix' => 'PRX',
     'title_postfix' => '',
 
     /*
