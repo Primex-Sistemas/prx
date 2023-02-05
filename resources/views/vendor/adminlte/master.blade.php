@@ -74,6 +74,8 @@
         <meta name="msapplication-TileImage" content="{{ asset('favicon/ms-icon-144x144.png') }}">
     @endif
     @include('sweetalert::alert')
+    <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+   
 </head>
 
 <body class="@yield('classes_body')" @yield('body_data')>
@@ -106,6 +108,9 @@
 
     {{-- Custom Scripts --}}
     @yield('adminlte_js')
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    
 
 </body>
 

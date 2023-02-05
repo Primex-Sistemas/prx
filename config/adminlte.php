@@ -383,6 +383,12 @@ return [
             'icon_color' => 'cyan',
             'url'        => '#',
         ],
+        [
+            'key'  => 'paginas',
+            'text' => 'paginas',
+            'url'  => 'admin/pages',
+            'icon' => 'far fa-fw fa-file',
+        ],
     ],
 
     /*

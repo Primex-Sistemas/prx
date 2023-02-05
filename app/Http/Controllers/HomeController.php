@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\DB;
+use App\Models\Departamento;
+use Yajra\DataTables\Facades\DataTables;
 
 class HomeController extends Controller
 {
@@ -21,8 +25,16 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(){     
+        $departamento = DB::table('departamentos')->paginate(5);    
+        return view('home')->with('departamento',$departamento);
+        
+  }
+  
+  public function getDepartamento(Request $request)
     {
-        return view('home');
+        $departamento = Departamento::all();
+        return DataTables::of($departamento)->make(true);
     }
+
 }
