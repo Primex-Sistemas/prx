@@ -26,15 +26,11 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index(){     
-        $departamento = DB::table('departamentos')->paginate(5);    
-        return view('home')->with('departamento',$departamento);
+        
+        return view('home');
         
   }
   
-  public function getDepartamento(Request $request)
-    {
-        $departamento = Departamento::all();
-        return DataTables::of($departamento)->make(true);
-    }
+ 
 
 }

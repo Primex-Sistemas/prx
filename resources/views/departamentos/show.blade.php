@@ -1,129 +1,37 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Departamentos')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <div class="shadow-sm p-0  rounded">
+    <h4 class="shadow ml-3" >Departamentos</h4>
+    </div>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-   <!-- <a href="#" class="btn btn-primary" data-widget="control-sidebar">Novo</a>    -->
-    <button type="button" id="add" data-bs-toggle="modal" data-bs-target="#addnew" class="btn btn-outline-info pull-right"> 
-    <span class="fa fa-book fa-fw {{ config('adminlte.classes_auth_icon', '') }}"></span>
-    Novo</button>
-    
- @stop
+    <button 
+            type="button" 
+            data-toggle="modal" 
+            data-target="#sidebar-add"  
+            class="btn btn-outline-info pull-right mt-2">
+            <span class="fa fa-book fa-fw {{ config('adminlte.classes_auth_icon', '') }}"></span>
+            Novo
+    </button>
+    <button 
+            type="button" 
+            class="btn btn-outline-success pull-right mt-2 float-right">
+            <span class="fa fa-filter fa-fw {{ config('adminlte.classes_auth_icon', '') }}"></span> 
+            Filtrar
+    </button>
+@stop
 
 @section('content')  
-    
-    <aside class="control-sidebar control-sidebar-dark">
-     <div class = "m-3">
-        <h5><span class="fa fa-edit fa-fw {{ config('adminlte.classes_auth_icon', '') }}"></span> Editar Cadastro</h5>           
-     </div>
-     <hr />      
-    <form class=" m-3" action="{{ URL::to('departamentos/update') }}" id="editForm">
-        <input type="hidden" id="memid" name="id">
-        <div class="form-group">
-            <label for="sigla">Sigla</label>
-            <input type="text" class="form-control" name= "sigla" id="sigla" placeholder="Digite a Sigla">
-        </div>
-        <div class="form-group">
-            <label for="nome">Nome</label>
-            <input type="text" class="form-control" name= "nome" id="nome" placeholder="Digite ao Nome">
-        </div>
-        <div class="form-group">
-            <label for="descricao">Descrição</label>
-            <input type="text" class="form-control" name= "descricao" id="descricao" placeholder="Digite a Descrição">
-        </div>
-        <button type="submit" class="btn btn-success">Salvar</button>
-        <button type="button" class="btn btn-warning" data-widget="control-sidebar">Cancelar</button>
-        </form>
-    </aside>
 
+@include('departamentos.edit')
 
-    <!-- Add Modal -->
-    <div class="modal fade" id="addnew" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="myModalLabel">Novo</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-            <div class="modal-body">
-                <form action="{{ URL::to('departamentos/save') }}" id="addForm">
-                <div class="form-group">
-                <label for="sigla">Sigla</label>
-                <input type="text" class="form-control" name= "sigla" id="sigla" placeholder="Digite a Sigla">
-                </div>
-                <div class="form-group">
-                    <label for="nome">Nome</label>
-                    <input type="text" class="form-control" name= "nome" id="nome" placeholder="Digite ao Nome">
-                </div>
-                <div class="form-group">
-                    <label for="descricao">Descrição</label>
-                    <input type="text" class="form-control" name= "descricao" id="descricao" placeholder="Digite a Descrição">
-                </div>
-            </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" id="newClose" >Sair</button>
-            <button type="submit" class="btn btn-primary">Salvar</button>
-            </form>
-        </div>
-        </div>
-    </div>
-    </div>
+@include('departamentos.delete')
 
+@include('departamentos.add')
 
-    <!-- Delete Modal -->
-    <div class="modal fade" id="deletemodal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="myModalLabel">Excluir</h5>            
-        </div>
-        <div class="modal-body">
-                <h4 class="text-center">Deseja Realmente Excluir?</h4>
-        </div>
-        <div class="modal-footer">
-            <button type="button" id="sairDelete" class="btn btn-secondary">Sair</button>
-            <button type="button" id="delete" class="btn btn-danger">Excluir</button>
-            </form>
-        </div>
-        </div>
-    </div>
-    </div>
-
-
-    <table id="departamento-table" class="col-md-12 table">
-        <thead>
-            <th>id</th>
-            <th>Sigla</th>
-            <th>Nome</th>
-            <th>Descrição</th>
-            <th>Ações</th>
-
-            <tbody id="#tableList">
-                @foreach ($departamento as $dp)
-                    <tr>
-                        <td>{{$dp->id}}</td>
-                        <td>{{$dp->sigla}}</td>
-                        <td>{{$dp->nome}}</td>
-                        <td>{{$dp->descricao}}</td>
-                        <td>
-                            <a href='#' class='btn btn-outline-success edit' data-toggle="modal" data-widget="control-sidebar"
-                                        data-id='{{ $dp->id }}' 
-                                        data-sigla='{{ $dp->sigla }}' 
-                                        data-nome='{{ $dp->nome }}'
-                                        data-descricao='{{ $dp->descricao }}'
-                            ><span class="fa fa-edit fa-fw {{ config('adminlte.classes_auth_icon', '') }}"></span></a> 
-                            <a href='#' class='btn btn-outline-danger delete' data-bs-toggle="deletemodal" data-id='{{ $dp->id }}'> 
-                            <span class="fa fa-trash fa-fw {{ config('adminlte.classes_auth_icon', '') }}"></span>
-                            </a>
-                        </td>
-                    </tr>
-                @endforeach 
-            </tbody>                    
-        </thead>        
-        </table>
-        {{ $departamento->links() }}
+@include('departamentos.list')    
     
 @stop
 
@@ -136,32 +44,50 @@
 
 @section('css')
 <style>
-    .control-sidebar{
-        width: 300px;
-    }
+/* MODAL RIGHT BOTTOM */
+.modal.fade:not(.in).left .modal-dialog {
+	-webkit-transform: translate3d(-25%, 0, 0);
+	transform: translate3d(-25%, 0, 0);
+}
+
+.modal.fade:not(.in).right .modal-dialog {
+	-webkit-transform: translate3d(25%, 0, 0);
+	transform: translate3d(25%, 0, 0);
+}
+.modal.fade:not(.in).bottom .modal-dialog {
+	-webkit-transform: translate3d(0, 25%, 0);
+	transform: translate3d(0, 25%, 0);
+}
+
+.modal.right .modal-dialog {
+	position:absolute;
+	top:0;
+	right:0;
+	margin:0;
+	margin-right: 10%;   
+}	
+.modal.right .modal-content {
+	min-height:100vh;
+	border:0;
+	width: 360px;
+}
+.modal-body{
+		max-height: calc(100vh - 140px);
+		overflow-y: auto;
+}
 </style>
 @stop
 
 @section('js')
 <script type="text/javascript">
-        $(document).ready(function(){
-  
+        $(document).ready(function(){ 
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
-            });             
-            showMember();
+            });  
         });
-
-        $("#add").click(function() {
-                $('#addnew').modal('show');
-             }); 
-    
-        $("#newClose").click(function(){
-            $('#addnew').modal('hide');
-        });
-
+  
         $('#addForm').on('submit', function(e){
                 e.preventDefault();
                 var form = $(this).serialize();
@@ -174,12 +100,10 @@
                     success: function(){
                         $('#addnew').modal('hide');
                         $('#addForm')[0].reset();
-                        location.reload(); 
-                        //showMember();
+                        location.reload();                        
                     }
                 }).fail(function (jqXHR, textStatus, error) {
-                        alert('Erro');
-                        $('.control-sidebar').hide();
+                        alert('Erro ao realizar a requisição');                       
                 });  
             });
 
@@ -205,12 +129,10 @@
                         data: form,
                         success: function() {   
                             location.reload();  
-                            alert('Atualizado');
-                            $('.control-sidebar').hide();
+                            alert('Registro atualizado com sucesso');                            
                         }
                     }).fail(function (jqXHR, textStatus, error) {
-                        alert('Erro');
-                        $('.control-sidebar').hide();
+                        alert('Erro ao realizar a requisição');
                     });                
             });
 
@@ -221,8 +143,7 @@
                 $('#delete').val(id);
             });
 
-            $('#delete').click(function(){
-                alert('oi');
+            $('#delete').click(function(){                
                 var id = $(this).val();
 
                 $.ajax({
@@ -231,11 +152,12 @@
                         data: {id:id},
                         success: function() {   
                             location.reload(); 
-                            $('#deletemodal').modal('hide');                            
+                            $('#deletemodal').modal('hide');   
+                            alert('Registro deletado com sucesso!');                         
                         }
                     }).fail(function (jqXHR, textStatus, error) {
-                        alert('Erro');  
-                        $('#deletemodal').modal('hide');                     
+                        alert('Erro ao realizar a requisição');  
+                        $('#deletemodal').modal('hide');                                      
                     });                 
              });
 
@@ -243,12 +165,7 @@
                 $('#deletemodal').modal('hide');
              }); 
 
-        function showMember(){ 
-            $.get("{{ URL::to('departamentos/show') }}", 
-            function(data){ 
-                 
-            });
-        }
+        function showMember(){$.get("{{ URL::to('departamentos/show') }}",function(data){});}
 
 </script>
 @stop

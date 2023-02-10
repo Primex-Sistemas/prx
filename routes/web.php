@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\DepartamentoController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,9 +18,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Auth::routes(['register' => true]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('home/list', [App\Http\Controllers\HomeController::class, 'getDepartamento'])->name('home.list');
+Route::get('/home', 'HomeController@index');
 
 Route::get('departamentos', 'DepartamentoController@index');
 Route::get('departamentos/show', 'DepartamentoController@getList');
