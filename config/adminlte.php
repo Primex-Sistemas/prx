@@ -273,7 +273,7 @@ return [
     |
     */
 
-    'enabled_laravel_mix' => false,
+    'enabled_laravel_mix' => true,
     'laravel_mix_css_path' => 'css/app.css',
     'laravel_mix_js_path' => 'js/app.js',
 
@@ -307,21 +307,16 @@ return [
             'text' => 'search',
         ],
         [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
-        [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
+            'text'        => 'Departamentos',
+            'url'         => 'Departamentos',
             'icon'        => 'far fa-fw fa-file',
             'label'       => 4,
             'label_color' => 'success',
         ],
         ['header' => 'account_settings'],
         [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
+            'text' => 'teste',
+            'url'  => 'Departamentos',
             'icon' => 'fas fa-fw fa-user',
         ],
         [

@@ -1,3 +1,4 @@
+
 <li @isset($item['id']) id="{{ $item['id'] }}" @endisset class="nav-item has-treeview {{ $item['submenu_class'] }}">
 
     {{-- Menu toggler --}}
@@ -18,6 +19,10 @@
                 </span>
             @endisset
         </p>
+        
+         <a href="departamentos">Departamento</a>            
+    
+        </p>     
 
     </a>
 
@@ -31,4 +36,5 @@
         @each('adminlte::partials.sidebar.menu-item', $item['submenu'], 'item')
     </ul>
 
+     
 </li>
